@@ -1,4 +1,4 @@
-package FactoryMethod;
+package com.mycompany.designpaterns.FactoryMethod;
 
 // GOF Product
 abstract class GOFCheese {
