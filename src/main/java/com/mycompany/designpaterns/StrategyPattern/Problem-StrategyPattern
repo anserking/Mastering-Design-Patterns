@@ -1,0 +1,111 @@
+Problem: E-Commerce Payment System
+
+You are building an online shopping system.
+
+Customers can pay using different payment methods:
+
+Credit Card
+PayPal
+Bank Transfer
+Cryptocurrency
+
+The checkout process should not know how each payment method works.
+
+Instead, it should delegate the payment processing to a payment strategy.
+
+Requirements
+Create an interface:
+IPaymentStrategy
+
+with method:
+
+pay(double amount)
+Create the following concrete strategies:
+CreditCardPayment
+PayPalPayment
+BankTransferPayment
+CryptoPayment
+
+Each should print a different payment message.
+
+Example:
+
+Paid $500 using Credit Card
+Create a class:
+ShoppingCart
+
+that contains:
+
+IPaymentStrategy paymentStrategy;
+The ShoppingCart constructor should receive a payment strategy.
+
+Example:
+
+ShoppingCart cart =
+    new ShoppingCart(
+        new PayPalPayment()
+    );
+Create a method:
+checkout(double amount)
+
+that uses the strategy to process the payment.
+
+Add a setter:
+setPaymentStrategy(...)
+
+so the payment method can be changed at runtime.
+
+Example:
+
+cart.checkout(500);
+
+Output:
+
+Paid $500 using PayPal
+
+Then:
+
+cart.setPaymentStrategy(
+    new CryptoPayment()
+);
+
+cart.checkout(500);
+
+Output:
+
+Paid $500 using Cryptocurrency
+Bonus Challenge
+
+Add discount strategies as well:
+
+IDiscountStrategy
+
+Implement:
+
+NoDiscount
+StudentDiscount
+BlackFridayDiscount
+PremiumMemberDiscount
+
+Now ShoppingCart should have:
+
+IPaymentStrategy paymentStrategy;
+IDiscountStrategy discountStrategy;
+
+and calculate the final amount before payment.
+
+This is where Strategy Pattern becomes really useful because:
+
+Payment Method
+    ×
+Discount Method
+
+can be mixed and matched independently without creating classes like:
+
+PaypalStudentDiscountCart
+PaypalBlackFridayCart
+CryptoStudentDiscountCart
+CryptoPremiumCart
+...
+
+which is exactly the kind of inheritance explosion Strategy Pattern is designed to avoid.
